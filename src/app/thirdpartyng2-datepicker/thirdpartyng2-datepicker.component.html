@@ -1,1 +1,25 @@
-<ng-datepicker [(ngModel)]="dob"></ng-datepicker>
+<div class="outer-container">
+  <form [formGroup]="userForm" (ngSubmit)="onSubmit()" novalidate>
+    <ng-datepicker
+      formControlName="dob"
+      [(ngModel)]="dobModel"
+      (ngModelChange)="onDobChange()">
+    </ng-datepicker>
+    <div class="invalid-feedback"
+         *ngIf="dob.errors && (dob.dirty || dob.touched)">
+      <p *ngIf="dob.errors.required">Dob is required</p>
+    </div>
+    <div>Valid? {{ dob.valid }}</div>
+    <div>Invalid? {{ dob.invalid }}</div>
+    <div>Pristine? {{ dob.pristine }}</div>
+    <div>Dirty? {{ dob.dirty }}</div>
+    <div>Touched? {{ dob.touched }}</div>
+    <div>Untouched? {{ dob.untouched }}</div>
+  </form>
+  <br />
+  <div>
+    {{dob.value}}
+    <br />
+    {{dobModel}}
+  </div>
+</div>

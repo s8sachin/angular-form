@@ -1,0 +1,8 @@
+.outer-container {
+  display: flex;
+  width: 100%;
+  justify-content: space-around;
+  &>div {
+    flex: 0 0 40%;
+  }
+}
