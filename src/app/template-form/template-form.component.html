@@ -1,0 +1,119 @@
+<form novalidate (ngSubmit)="onSubmit()" #formRef="ngForm">
+
+  <div ngModelGroup="some-unique-random-group-name">
+    <div class="form-group">
+      <label>First Name</label>
+      <input
+        type="text"
+        class="form-control"
+        name="some-unique-random-name-first-name"
+        [(ngModel)]="user.name.firstName"
+        required
+        #firstNameRef="ngModel"
+        [ngClass]="{
+          'is-invalid': firstNameRef.invalid && (firstNameRef.dirty || firstNameRef.touched),
+          'is-valid': firstNameRef.valid && (firstNameRef.dirty || firstNameRef.touched)
+        }">
+      <div class="invalid-feedback"
+           *ngIf="firstNameRef.errors && (firstNameRef.dirty || firstNameRef.touched)">
+        <p *ngIf="firstNameRef.errors.required">First name is required</p>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label>Last Name</label>
+      <input
+        type="text"
+        class="form-control"
+        name="some-unique-random-name-last-name"
+        [(ngModel)]="user.name.lastName"
+        required
+        #lastNameRef="ngModel"
+        [ngClass]="{
+          'is-invalid': lastNameRef.invalid && (lastNameRef.dirty || lastNameRef.touched),
+          'is-valid': lastNameRef.valid && (lastNameRef.dirty || lastNameRef.touched)
+        }">
+      <div class="invalid-feedback"
+           *ngIf="lastNameRef.errors && (lastNameRef.dirty || lastNameRef.touched)">
+        <p *ngIf="lastNameRef.errors.required">Last name is required</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label>DOB</label>
+    <input
+      type="date"
+      class="form-control"
+      name="some-unique-random-name-dob-string"
+      [(ngModel)]="user.dobString"
+      required
+      #dobRef="ngModel"
+      (ngModelChange)="onDobChange()"
+      [ngClass]="{
+      'is-invalid': dobRef.invalid && (dobRef.dirty || dobRef.touched),
+      'is-valid': dobRef.valid && (dobRef.dirty || dobRef.touched)
+    }">
+    <div class="invalid-feedback"
+         *ngIf="dobRef.errors">
+      <p *ngIf="dobRef.errors.required">DOB is required</p>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label>Email</label>
+    <input
+      type="email"
+      class="form-control"
+      name="some-unique-random-name-email"
+      [(ngModel)]="user.email"
+      required
+      pattern="[^ @]*@[^ @]*"
+      #emailRef="ngModel"
+      [ngClass]="{
+        'is-invalid': emailRef.invalid && (emailRef.dirty || emailRef.touched),
+        'is-valid': emailRef.valid && (emailRef.dirty || emailRef.touched)
+      }">
+    <div class="invalid-feedback"
+         *ngIf="emailRef.errors && (emailRef.dirty || emailRef.touched)">
+      <p *ngIf="emailRef.errors.required">Email is required</p>
+      <p *ngIf="emailRef.errors.pattern">Email must contain at least the @ character</p>
+    </div>
+  </div>
+
+
+  <div class="form-group">
+    <label>Password</label>
+    <input
+      type="password"
+      class="form-control"
+      name="some-unique-random-name-password"
+      [(ngModel)]="user.password"
+      required
+      minlength="8"
+      #passwordRef="ngModel"
+      [ngClass]="{
+        'is-invalid': passwordRef.invalid && (passwordRef.dirty || passwordRef.touched),
+        'is-valid': passwordRef.valid && (passwordRef.dirty || passwordRef.touched)
+      }">
+    <div class="invalid-feedback"
+         *ngIf="passwordRef.errors && (passwordRef.dirty || passwordRef.touched)">
+      <p *ngIf="passwordRef.errors.required">Password is required</p>
+      <p *ngIf="passwordRef.errors.minlength">Password must be at least 8 characters long</p>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label>Language</label>
+    <select class="form-control" name="some-unique-random-name-language" [(ngModel)]="user.language">
+      <option value="">Please select a language</option>
+      <option *ngFor="let lang of langs" [value]="lang">{{lang}}</option>
+    </select>
+  </div>
+
+  <button type="submit" class="btn btn-primary" [disabled]="formRef.invalid">Submit</button>
+
+  <pre>{{formRef.value | json}}</pre>
+  <pre>{{user | json}}</pre>
+
+</form>
