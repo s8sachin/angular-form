@@ -1,0 +1,22 @@
+<div class="user-item">
+  <div>{{user.name}}</div>
+
+  <div (click)="user.toggleHide()"
+     class="btn btn-primary">Show User Details
+  </div>
+
+  <div (click)="toggleEdit()"
+       class="btn btn-secondary">Edit User
+  </div>
+  <div (click)="destroy()"
+       class="btn btn-danger">Delete User
+  </div>
+</div>
+
+<app-user-form *ngIf="user.edit" [user]="user"></app-user-form>
+
+<div class="show-details" *ngIf="user.show">
+  <div>{{user.name}}</div>
+  <div>{{user.mobile}}</div>
+  <div>{{user.address}}</div>
+</div>
